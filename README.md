@@ -10,8 +10,12 @@ Galaxy A02s (SM-A025M), base de firmware A025MUBS9CXI1.
 - Userspace 32-bit (kernel arm64): o vendor stock não tem `lib64`.
 - SELinux permissive durante a bring-up.
 
-Estado: `m nothing`, kernel, dtbo e `selinux_policy` compilam. ROM completa
-(`brunch a02q`) e boot no aparelho ainda não testados.
+Estado: a ROM completa compila (`lineage-19.1-*-UNOFFICIAL-a02q.zip`, pacote
+não-A/B com partições dinâmicas). Boot no aparelho ainda não testado.
+
+Host Ubuntu 23.10+: instalar `libtinfo5` e `libncurses5` do Ubuntu 22.04
+(o `llvm-rs-cc` precisa). Depois de mudar config de board, rodar
+`m installclean` antes do build.
 
 ```bash
 source build/envsetup.sh
