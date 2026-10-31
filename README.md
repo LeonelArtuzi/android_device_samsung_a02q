@@ -1,12 +1,20 @@
 # device/samsung/a02q — LineageOS 19.1 (SM-A025M, msm8953)
 
-Skeleton inicial. Valores de board reais (arch, kernel, partições, super, AVB)
-semeados a partir do device tree de TWRP. Ainda NÃO builda: falta a bring-up
-(ver TODO em device.mk).
+Galaxy A02s (SM-A025M), base de firmware A025MUBS9CXI1.
 
-Próximos passos:
-1. kernel/samsung/a02q  (reusar ~/a02q-lineage-backup/kernel-a02q — `make mrproper` antes)
-2. vendor/samsung/a02q  (extrair blobs do stock: extract-files.sh / proprietary-files.txt)
-3. rootdir (fstab.qcom, init.*.rc, ueventd, gpt) + manifests Treble
-4. HALs + SELinux + overlays
-5. `breakfast a02q` -> `export OUT_DIR=/mnt/android/a02s_twrp/out` -> `brunch a02q`
+- Kernel: `kernel/samsung/a02q` (4.9.227-26302074), áudio e pronto wlan
+  compilados do fonte.
+- Blobs: `vendor/samsung/a02q`, gerados por `setup-makefiles.sh` a partir de
+  `proprietary-files.txt`. Onde existe módulo AOSP/Lineage/CAF equivalente,
+  o open-source tem prioridade e o blob sai da lista.
+- Userspace 32-bit (kernel arm64): o vendor stock não tem `lib64`.
+- SELinux permissive durante a bring-up.
+
+Estado: `m nothing`, kernel, dtbo e `selinux_policy` compilam. ROM completa
+(`brunch a02q`) e boot no aparelho ainda não testados.
+
+```bash
+source build/envsetup.sh
+lunch lineage_a02q-userdebug
+mka bacon
+```
