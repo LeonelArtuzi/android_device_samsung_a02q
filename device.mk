@@ -303,6 +303,10 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_USES_VENDORIMAGE := true
 
+# Dynamic partitions (system/vendor/product/odm in super, launched with them).
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+PRODUCT_USE_DYNAMIC_PARTITION_SIZE := true
+
 # fstab: vendor copy for mount_all, ramdisk copy for first-stage mount.
 PRODUCT_COPY_FILES += \
     device/samsung/a02q/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.qcom \

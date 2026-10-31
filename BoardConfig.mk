@@ -98,11 +98,14 @@ BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor product odm
 TARGET_COPY_OUT_VENDOR := vendor
 TARGET_COPY_OUT_PRODUCT := product
 TARGET_COPY_OUT_ODM := odm
-BOARD_SYSTEMIMAGE_PARTITION_TYPE := ext4
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
+# Cache size from the stock PIT (A02Q_CIS_OPEN.pit); non-A/B OTAs stash in it.
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_CACHEIMAGE_PARTITION_SIZE := 167772160
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
@@ -116,13 +119,21 @@ BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 2
 # Treble / VNDK (stock vendor is VNDK 31 on A12 base).
 BOARD_VNDK_VERSION := current
 
+# Stock blobs ship as PRODUCT_COPY_FILES; as cc_prebuilt modules soong would
+# check every .so's deps against ~1900 32-bit Samsung libs.
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+
 # RIL: keep Samsung's stock rild (skips AOSP hardware/ril/rild).
 ENABLE_VENDOR_RIL_SERVICE := true
 
-# VINTF: stock vendor manifest + device compatibility matrix.
-# (VINTF metadata can't be installed via PRODUCT_COPY_FILES.)
-DEVICE_MANIFEST_FILE := vendor/samsung/a02q/proprietary/vendor/etc/vintf/manifest.xml
-DEVICE_MATRIX_FILE := vendor/samsung/a02q/proprietary/vendor/etc/vintf/compatibility_matrix.xml
+# VINTF: stock vendor manifest + device compatibility matrix, minus the
+# hard-coded vendor-ndk/system-sdk/sepolicy versions (stock is 31, this
+# vendor is built as 32), which assemble_vintf fills in.
+DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/configs/vintf/manifest.xml
+DEVICE_MATRIX_FILE := $(DEVICE_PATH)/configs/vintf/compatibility_matrix.xml
+
+# Vendor AIDs (passwd/group) and file caps the stock vendor init/rc expect.
+TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 
 # Filesystem: /efs (sec_efs) holds Samsung RIL data (IMEI etc.).
 BOARD_ROOT_EXTRA_FOLDERS := efs
