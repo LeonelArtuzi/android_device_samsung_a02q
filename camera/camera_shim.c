@@ -1,21 +1,34 @@
 /*
  * camera.a02q: presents the stock HS50 camera HAL (camera.msm8953.so) to the
- * AOSP camera provider. The vendor built it with a camera_module_t that has
- * one extra field after get_number_of_cameras, so every later member sits 4
- * bytes off the AOSP layout (the AOSP provider's init() lands on
- * set_torch_mode). Selected with ro.hardware.camera=a02q.
+ * AOSP camera provider. Selected with ro.hardware.camera=a02q.
+ *
+ * Two vendor differences are bridged here:
+ *  - The HAL was built with a camera_module_t that has one extra field after
+ *    get_number_of_cameras, so every later member sits 4 bytes off the AOSP
+ *    layout (the AOSP provider's init() would land on set_torch_mode).
+ *  - The HAL addresses cameras by Samsung camera IDs (0 rear, 1 front, and
+ *    20/21/51/52 for the extra rear sensors), translated internally by
+ *    QCamera2Factory::mapCameraIDForHS50 from the sensor position bits that
+ *    libmmcamera_interface reports. The AOSP framework asks for 0..N-1, so the
+ *    shim exposes contiguous IDs and translates them both ways. The extra rear
+ *    sensors are only probed with persist.vendor.camera.expose.aux=1.
  */
 
 #define LOG_TAG "camera.a02q"
 
 #include <dlfcn.h>
 #include <errno.h>
+#include <pthread.h>
 #include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include <hardware/camera_common.h>
 #include <log/log.h>
 
 #define VENDOR_HAL "/vendor/lib/hw/camera.msm8953.so"
+#define VENDOR_MM_INTERFACE "libmmcamera_interface.so"
+#define MAX_CAMERAS 8
 
 /* Layout the vendor HAL was compiled with (offsets from the stock provider). */
 typedef struct {
@@ -42,17 +55,113 @@ _Static_assert(sizeof(void*) != 4 || offsetof(vendor_camera_module_t, init) == 1
                "init must be at +156 like the stock provider expects");
 
 static vendor_camera_module_t* vendor;
+static uint32_t (*vendor_get_camera_position)(void);
+
+/*
+ * Sensor position bit -> Samsung camera ID, as handled by the vendor's
+ * QCamera2Factory::mapCameraIDForHS50 (decompiled from the stock HAL).
+ */
+static const struct {
+    int bit;
+    int samsung_id;
+} kPositionIds[] = {
+        {0, 0},    /* rear main */
+        {2, 1},    /* front */
+        {4, 0x14}, /* 20 */
+        {6, 0x15}, /* 21 */
+        {8, 0x34}, /* 52 */
+        {9, 0x33}, /* 51 */
+};
+
+static pthread_once_t table_once = PTHREAD_ONCE_INIT;
+static int num_cameras;
+static int samsung_ids[MAX_CAMERAS]; /* AOSP id -> Samsung id */
+
+static void build_table(void) {
+    /* Constructs QCamera2Factory, which probes the sensors and sets the position bits. */
+    int vendor_count = vendor->get_number_of_cameras();
+    uint32_t position = vendor_get_camera_position ? vendor_get_camera_position() : 0;
+
+    for (size_t i = 0; i < sizeof(kPositionIds) / sizeof(kPositionIds[0]); i++) {
+        if (!(position & (1u << kPositionIds[i].bit)) || num_cameras == MAX_CAMERAS) continue;
+        samsung_ids[num_cameras] = kPositionIds[i].samsung_id;
+        ALOGI("camera %d -> vendor id %d (position bit %d)", num_cameras,
+              kPositionIds[i].samsung_id, kPositionIds[i].bit);
+        num_cameras++;
+    }
+    if (num_cameras == 0) {
+        /* No position info: fall back to the vendor's own contiguous IDs. */
+        ALOGW("no camera position bits (%#x), exposing %d vendor ids as-is", position,
+              vendor_count);
+        for (; num_cameras < vendor_count && num_cameras < MAX_CAMERAS; num_cameras++)
+            samsung_ids[num_cameras] = num_cameras;
+    }
+    ALOGI("position bits %#x, vendor count %d, exposing %d cameras", position, vendor_count,
+          num_cameras);
+}
+
+static int to_vendor_id(int id) {
+    pthread_once(&table_once, build_table);
+    return (id >= 0 && id < num_cameras) ? samsung_ids[id] : -1;
+}
+
+static int from_vendor_id(int vendor_id) {
+    pthread_once(&table_once, build_table);
+    for (int i = 0; i < num_cameras; i++)
+        if (samsung_ids[i] == vendor_id) return i;
+    return vendor_id;
+}
+
+/* String IDs ("0", "1", ...) are used by open, open_legacy and the torch calls. */
+static const char* to_vendor_id_str(const char* id, char* buf, size_t len) {
+    char* end;
+    long v = strtol(id, &end, 10);
+    if (*id == '\0' || *end != '\0') return NULL;
+    int vendor_id = to_vendor_id((int)v);
+    if (vendor_id < 0) return NULL;
+    snprintf(buf, len, "%d", vendor_id);
+    return buf;
+}
+
+static const camera_module_callbacks_t* framework_callbacks;
+
+static void shim_camera_device_status_change(const struct camera_module_callbacks* cb __unused,
+                                             int camera_id, int new_status) {
+    framework_callbacks->camera_device_status_change(framework_callbacks,
+                                                     from_vendor_id(camera_id), new_status);
+}
+
+static void shim_torch_mode_status_change(const struct camera_module_callbacks* cb __unused,
+                                          const char* camera_id, int new_status) {
+    char buf[16];
+    char* end;
+    long v = strtol(camera_id, &end, 10);
+    if (*camera_id != '\0' && *end == '\0') {
+        snprintf(buf, sizeof(buf), "%d", from_vendor_id((int)v));
+        camera_id = buf;
+    }
+    framework_callbacks->torch_mode_status_change(framework_callbacks, camera_id, new_status);
+}
+
+static const camera_module_callbacks_t shim_callbacks = {
+        .camera_device_status_change = shim_camera_device_status_change,
+        .torch_mode_status_change = shim_torch_mode_status_change,
+};
 
 static int shim_get_number_of_cameras(void) {
-    return vendor->get_number_of_cameras();
+    pthread_once(&table_once, build_table);
+    return num_cameras;
 }
 
 static int shim_get_camera_info(int camera_id, struct camera_info* info) {
-    return vendor->get_camera_info(camera_id, info);
+    int vendor_id = to_vendor_id(camera_id);
+    if (vendor_id < 0) return -EINVAL;
+    return vendor->get_camera_info(vendor_id, info);
 }
 
 static int shim_set_callbacks(const camera_module_callbacks_t* callbacks) {
-    return vendor->set_callbacks(callbacks);
+    framework_callbacks = callbacks;
+    return vendor->set_callbacks(callbacks ? &shim_callbacks : NULL);
 }
 
 static void shim_get_vendor_tag_ops(vendor_tag_ops_t* ops) {
@@ -61,11 +170,17 @@ static void shim_get_vendor_tag_ops(vendor_tag_ops_t* ops) {
 
 static int shim_open_legacy(const struct hw_module_t* module __unused, const char* id,
                             uint32_t halVersion, struct hw_device_t** device) {
-    return vendor->open_legacy(&vendor->common, id, halVersion, device);
+    char buf[16];
+    const char* vendor_id = to_vendor_id_str(id, buf, sizeof(buf));
+    if (!vendor_id) return -EINVAL;
+    return vendor->open_legacy(&vendor->common, vendor_id, halVersion, device);
 }
 
 static int shim_set_torch_mode(const char* camera_id, bool enabled) {
-    return vendor->set_torch_mode(camera_id, enabled);
+    char buf[16];
+    const char* vendor_id = to_vendor_id_str(camera_id, buf, sizeof(buf));
+    if (!vendor_id) return -EINVAL;
+    return vendor->set_torch_mode(vendor_id, enabled);
 }
 
 static int shim_init(void) {
@@ -79,7 +194,9 @@ static int shim_get_physical_camera_info(int physical_camera_id,
 
 static int shim_is_stream_combination_supported(int camera_id,
                                                 const camera_stream_combination_t* streams) {
-    return vendor->is_stream_combination_supported(camera_id, streams);
+    int vendor_id = to_vendor_id(camera_id);
+    if (vendor_id < 0) return -EINVAL;
+    return vendor->is_stream_combination_supported(vendor_id, streams);
 }
 
 static void shim_notify_device_state_change(uint64_t deviceState) {
@@ -88,8 +205,11 @@ static void shim_notify_device_state_change(uint64_t deviceState) {
 
 static int shim_open(const struct hw_module_t* module __unused, const char* id,
                      struct hw_device_t** device) {
+    char buf[16];
     if (!vendor) return -ENODEV;
-    return vendor->common.methods->open(&vendor->common, id, device);
+    const char* vendor_id = to_vendor_id_str(id, buf, sizeof(buf));
+    if (!vendor_id) return -EINVAL;
+    return vendor->common.methods->open(&vendor->common, vendor_id, device);
 }
 
 static struct hw_module_methods_t shim_methods = {
@@ -119,6 +239,10 @@ __attribute__((constructor)) static void shim_load(void) {
         ALOGE("dlsym %s: %s", HAL_MODULE_INFO_SYM_AS_STR, dlerror());
         return;
     }
+    /* Already loaded by the vendor HAL; RTLD_NOLOAD just takes a handle to it. */
+    void* mm = dlopen(VENDOR_MM_INTERFACE, RTLD_NOW | RTLD_NOLOAD);
+    if (mm) vendor_get_camera_position = (uint32_t(*)(void))dlsym(mm, "get_camera_position");
+    if (!vendor_get_camera_position) ALOGW("get_camera_position not found: %s", dlerror());
 
     camera_module_t* m = &HAL_MODULE_INFO_SYM;
     m->common.module_api_version = vendor->common.module_api_version;

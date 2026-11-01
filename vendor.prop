@@ -139,3 +139,5 @@ vendor.hw.fm.init=0
 # Camera: load the camera.a02q shim (camera/), which adapts the stock
 # camera.msm8953.so module struct to the AOSP layout.
 ro.hardware.camera=a02q
+# Probe the extra rear sensors too; camera.a02q maps them to contiguous IDs.
+persist.vendor.camera.expose.aux=1
