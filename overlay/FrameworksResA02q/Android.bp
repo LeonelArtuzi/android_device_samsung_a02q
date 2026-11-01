@@ -1,0 +1,5 @@
+// Device framework-res overrides (vendor RRO).
+runtime_resource_overlay {
+    name: "FrameworksResA02q",
+    vendor: true,
+}

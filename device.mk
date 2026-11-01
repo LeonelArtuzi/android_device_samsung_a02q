@@ -19,6 +19,12 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-service \
     libbt-vendor
 
+# Display: LiveDisplay SDM backend (picture adjustment through the stock
+# libsdm-disp-vndapis) + framework overlay enabling Night Light.
+PRODUCT_PACKAGES += \
+    FrameworksResA02q \
+    vendor.lineage.livedisplay@2.0-service-sdm
+
 # Camera HAL shim (see camera/camera_shim.c).
 PRODUCT_PACKAGES += \
     camera.a02q
