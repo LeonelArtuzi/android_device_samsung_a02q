@@ -99,6 +99,9 @@ $(foreach l,$(A02Q_VENDOR_SYMLINKS),\
 
 ALL_DEFAULT_INSTALLED_MODULES += $(A02Q_VENDOR_DIR_TARGETS)
 
+# QTI open-source power HAL (see power/Android.mk). Resets LOCAL_PATH too.
+include $(LOCAL_PATH)/power/Android.mk
+
 # CAF libbt-vendor (pronto SMD path). hardware/qcom-caf/bt/Android.mk only
 # includes it with BOARD_USES_QCOM_HARDWARE, which stays off for the stock
 # display/audio/media blobs. Kept last: it resets LOCAL_PATH.

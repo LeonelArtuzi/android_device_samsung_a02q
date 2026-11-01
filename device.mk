@@ -137,8 +137,7 @@ PRODUCT_PACKAGES += \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service \
     android.hardware.power-V1-ndk_platform.vendor \
-    android.hardware.power@1.0-impl \
-    android.hardware.power@1.0-service \
+    android.hardware.power-service-qti \
     android.hardware.power@1.0.vendor \
     android.hardware.power@1.1.vendor \
     android.hardware.power@1.2.vendor \
@@ -281,7 +280,6 @@ PRODUCT_PACKAGES += \
     libwifi-hal \
     libz_stable.vendor \
     local_time.default \
-    power.default \
     vendor.display.config@1.0.vendor \
     vendor.display.config@1.1.vendor \
     vendor.display.config@1.10.vendor \
