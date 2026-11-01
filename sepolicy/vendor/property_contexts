@@ -1,0 +1,5 @@
+# Handshake between the CAF libbt-vendor (hal_bluetooth) and a02q-bt-nvm.
+# The qcom "vendor.bluetooth." prefix maps to the system-owned bluetooth_prop,
+# which vendor domains may not set.
+vendor.bluetooth.hciattach    u:object_r:vendor_bluetooth_prop:s0
+vendor.bluetooth.status       u:object_r:vendor_bluetooth_prop:s0

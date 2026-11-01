@@ -155,7 +155,12 @@ WIFI_DRIVER_FW_PATH_STA := "sta"
 WIFI_DRIVER_FW_PATH_AP := "ap"
 WIFI_DRIVER_FW_PATH_P2P := "p2p"
 
+# Bluetooth (pronto, SMD): CAF libbt-vendor under the AOSP HIDL service;
+# the NVM tags are sent by a02q-bt-nvm (bluetooth/).
+BOARD_HAVE_BLUETOOTH_QCOM := true
+
 # SELinux: qcom legacy-um policy (lists msm8953). Device policy goes in sepolicy/vendor.
 include device/qcom/sepolicy-legacy-um/SEPolicy.mk
+BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 
 include vendor/lineage/config/BoardConfigLineage.mk

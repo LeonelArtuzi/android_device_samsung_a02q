@@ -1,0 +1,11 @@
+# Started by the CAF libbt-vendor (SMD path) through vendor.bluetooth.hciattach;
+# reports back through vendor.bluetooth.status.
+service vendor.a02q-bt-nvm /vendor/bin/a02q-bt-nvm
+    class late_start
+    user bluetooth
+    group bluetooth
+    disabled
+    oneshot
+
+on property:vendor.bluetooth.hciattach=true
+    start vendor.a02q-bt-nvm

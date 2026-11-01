@@ -36,7 +36,6 @@ vendor/bin/fsdbg_vendor
 vendor/bin/hal_proxy_daemon
 vendor/bin/hqread
 vendor/bin/hvdcp_opti
-vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
 vendor/bin/hw/android.hardware.drm@1.3-service.widevine
 vendor/bin/hw/android.hardware.dumpstate@1.1-service-lazy
 vendor/bin/hw/android.hardware.gatekeeper@1.0-service-qti
@@ -426,7 +425,6 @@ vendor/etc/hyper/config_chipset.json
 vendor/etc/hyper/config_hyper_permission.json
 vendor/etc/hyper/config_model.json
 vendor/etc/hyper/config_vendor.json
-vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc
 vendor/etc/init/android.hardware.drm@1.3-service.widevine.rc
 vendor/etc/init/android.hardware.dumpstate@1.1-service-lazy.rc
 vendor/etc/init/android.hardware.gatekeeper@1.0-service-qti.rc
@@ -754,7 +752,6 @@ vendor/lib/egl/libq3dtools_adreno.so
 vendor/lib/egl/libq3dtools_esx.so
 vendor/lib/ftm_fm_lib.so
 vendor/lib/hw/activity_recognition.msm8953.so
-vendor/lib/hw/android.hardware.bluetooth@1.0-impl-qti.so
 vendor/lib/hw/android.hardware.gatekeeper@1.0-impl-qti.so
 vendor/lib/hw/android.hardware.gnss@2.1-impl-qti.so
 vendor/lib/hw/android.hardware.health@2.0-impl-2.1-samsung.so
@@ -773,7 +770,6 @@ vendor/lib/hw/power.qcom.so
 vendor/lib/hw/vendor.qti.esepowermanager@1.1-impl.so
 vendor/lib/hw/vendor.qti.hardware.bluetooth_audio@2.0-impl.so
 vendor/lib/hw/vendor.qti.hardware.bluetooth_audio@2.1-impl.so
-vendor/lib/hw/vendor.qti.hardware.bluetooth_sar@1.1-impl.so
 vendor/lib/hw/vendor.qti.hardware.btconfigstore@1.0-impl.so
 vendor/lib/hw/vendor.qti.hardware.btconfigstore@2.0-impl.so
 vendor/lib/hw/vendor.qti.hardware.capabilityconfigstore@1.0-impl.so
@@ -866,7 +862,6 @@ vendor/lib/libbatterylistener.so
 vendor/lib/libbluetooth_audio_session_qti.so
 vendor/lib/libbluetooth_audio_session_qti_2_1.so
 vendor/lib/libbt-hidlclient.so
-vendor/lib/libbtnv.so
 vendor/lib/libc2d30_bltlib.so
 vendor/lib/libc2dcolorconvert.so
 vendor/lib/libcacertclient.so
@@ -2298,8 +2293,6 @@ vendor/lib/vendor.qti.data.mwqem@1.0.so
 vendor/lib/vendor.qti.data.slm@1.0.so
 vendor/lib/vendor.qti.esepowermanager@1.0.so
 vendor/lib/vendor.qti.esepowermanager@1.1.so
-vendor/lib/vendor.qti.hardware.bluetooth_sar@1.0.so
-vendor/lib/vendor.qti.hardware.bluetooth_sar@1.1.so
 vendor/lib/vendor.qti.hardware.cacert@1.0.so
 vendor/lib/vendor.qti.hardware.cvp@1.0.so
 vendor/lib/vendor.qti.hardware.data.cne.internal.api@1.0.so

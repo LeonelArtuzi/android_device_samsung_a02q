@@ -1,0 +1,18 @@
+# Bluetooth NVM tag loader (device/samsung/a02q/bluetooth).
+type a02q_bt_nvm, domain;
+type a02q_bt_nvm_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(a02q_bt_nvm)
+
+# HCI command channel to the pronto BT core.
+allow a02q_bt_nvm smd_device:chr_file rw_file_perms;
+
+# BD address from /efs/bluetooth/bt_addr (ro.bt.bdaddr_path).
+allow a02q_bt_nvm efs_file:dir search;
+r_dir_file(a02q_bt_nvm, bluetooth_efs_file)
+get_prop(a02q_bt_nvm, exported_bluetooth_prop)
+
+# ro.boot.pcbainfo selects the WCN chip byte of NVM tag 36.
+get_prop(a02q_bt_nvm, bootloader_prop)
+
+set_prop(a02q_bt_nvm, vendor_bluetooth_prop)

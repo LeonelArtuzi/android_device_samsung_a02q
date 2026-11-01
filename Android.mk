@@ -99,4 +99,9 @@ $(foreach l,$(A02Q_VENDOR_SYMLINKS),\
 
 ALL_DEFAULT_INSTALLED_MODULES += $(A02Q_VENDOR_DIR_TARGETS)
 
+# CAF libbt-vendor (pronto SMD path). hardware/qcom-caf/bt/Android.mk only
+# includes it with BOARD_USES_QCOM_HARDWARE, which stays off for the stock
+# display/audio/media blobs. Kept last: it resets LOCAL_PATH.
+include hardware/qcom-caf/bt/libbt-vendor/Android.mk
+
 endif

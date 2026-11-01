@@ -12,6 +12,13 @@ PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
     vendor.qti.hardware.vibrator.service
 
+# Bluetooth: AOSP HIDL service + CAF libbt-vendor (SMD) + NVM tag loader (bluetooth/).
+PRODUCT_PACKAGES += \
+    a02q-bt-nvm \
+    android.hardware.bluetooth@1.0-impl \
+    android.hardware.bluetooth@1.0-service \
+    libbt-vendor
+
 # Camera HAL shim (see camera/camera_shim.c).
 PRODUCT_PACKAGES += \
     camera.a02q

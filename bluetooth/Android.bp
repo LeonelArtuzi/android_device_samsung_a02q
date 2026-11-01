@@ -1,0 +1,14 @@
+cc_binary {
+    name: "a02q-bt-nvm",
+    vendor: true,
+    srcs: ["bt_nvm.c"],
+    init_rc: ["a02q-bt-nvm.rc"],
+    shared_libs: [
+        "libcutils",
+        "liblog",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+}
