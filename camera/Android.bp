@@ -1,0 +1,19 @@
+cc_library_shared {
+    name: "camera.a02q",
+    vendor: true,
+    relative_install_path: "hw",
+    srcs: ["camera_shim.c"],
+    shared_libs: [
+        "libcamera_metadata",
+        "libdl",
+        "liblog",
+    ],
+    header_libs: [
+        "libhardware_headers",
+        "libsystem_headers",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+}

@@ -12,6 +12,10 @@ PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
     vendor.qti.hardware.vibrator.service
 
+# Camera HAL shim (see camera/camera_shim.c).
+PRODUCT_PACKAGES += \
+    camera.a02q
+
 # Open-source builds of files the stock vendor ships prebuilt (HIDL interface
 # libs, soft codecs, effects, generic HAL services). Blobs of the same path are
 # dropped from proprietary-files.txt so these win.
@@ -318,7 +322,8 @@ PRODUCT_PACKAGES += \
     hostapd_cli \
     libwpa_client \
     wpa_cli \
-    wpa_supplicant
+    wpa_supplicant \
+    wpa_supplicant.conf
 
 # TODO bring-up (still stock blobs/rc today):
 #  - device sepolicy (sepolicy/vendor) once permissive boot logs show denials

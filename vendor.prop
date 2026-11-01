@@ -135,3 +135,7 @@ ro.vendor.audio.name=HS50
 ro.vendor.fingerprintUI=1
 ro.config.vc_call_vol_steps=8
 vendor.hw.fm.init=0
+
+# Camera: load the camera.a02q shim (camera/), which adapts the stock
+# camera.msm8953.so module struct to the AOSP layout.
+ro.hardware.camera=a02q
