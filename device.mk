@@ -328,6 +328,12 @@ PRODUCT_COPY_FILES += \
     device/samsung/a02q/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.qcom \
     device/samsung/a02q/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
 
+# Audio policy: stock config with the Bluetooth Audio HAL module instead of
+# the legacy a2dp one (see configs/audio/audio_policy_configuration.xml).
+PRODUCT_COPY_FILES += \
+    device/samsung/a02q/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_audio_policy_configuration.xml
+
 # Wi-Fi (configs in vendor/etc/wifi stay stock; services in stock init.qcom.rc).
 PRODUCT_PACKAGES += \
     hostapd \

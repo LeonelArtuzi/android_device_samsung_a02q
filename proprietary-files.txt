@@ -137,7 +137,6 @@ vendor/bin/xtra-daemon
 vendor/bin/xtwifi-client
 vendor/bin/xtwifi-inet-agent
 vendor/etc/IPACM_cfg.xml
-vendor/etc/a2dp_audio_policy_configuration.xml
 vendor/etc/a2dpsink_audio_policy_configuration.xml
 vendor/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
 vendor/etc/acdbdata/MTP/MTP_General_cal.acdb
@@ -333,11 +332,9 @@ vendor/etc/audio_platform_info_smartpa.xml
 vendor/etc/audio_platform_info_tasha.xml
 vendor/etc/audio_platform_info_tashalite.xml
 vendor/etc/audio_policy.conf
-vendor/etc/audio_policy_configuration.xml
 vendor/etc/audio_policy_configuration_sec.xml
 vendor/etc/audio_policy_volumes.xml
 vendor/etc/audio_tuning_mixer.txt
-vendor/etc/bluetooth_audio_policy_configuration.xml
 vendor/etc/cacert_location.pem
 vendor/etc/camera/camera_config.xml
 vendor/etc/camera/csidtg_camera.xml
