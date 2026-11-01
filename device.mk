@@ -16,6 +16,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     camera.a02q
 
+# Samsung software Codec2: open-source store and service (codec2/) serving the
+# stock libcodec2_sec_* codecs. Dolby blobs come from an untracked makefile.
+PRODUCT_PACKAGES += \
+    libSecC2ComponentStore \
+    samsung.software.media.c2@1.0-service
+$(call inherit-product-if-exists, vendor/samsung/a02q/dolby.mk)
+
 # Open-source builds of files the stock vendor ships prebuilt (HIDL interface
 # libs, soft codecs, effects, generic HAL services). Blobs of the same path are
 # dropped from proprietary-files.txt so these win.

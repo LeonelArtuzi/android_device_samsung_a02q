@@ -1,0 +1,27 @@
+// Open-source replacements for the stock Samsung software Codec2 store and
+// service; the stock codec libraries (libcodec2_sec_*) stay prebuilt.
+
+cc_library_shared {
+    name: "libSecC2ComponentStore",
+    vendor: true,
+    defaults: ["libcodec2-hidl-defaults@1.0"],
+    srcs: ["SecC2Store.cpp"],
+    shared_libs: [
+        "libdmabufheap",
+        "liblog",
+    ],
+}
+
+cc_binary {
+    name: "samsung.software.media.c2@1.0-service",
+    vendor: true,
+    relative_install_path: "hw",
+    defaults: ["libcodec2-hidl-defaults@1.0"],
+    srcs: ["service.cpp"],
+    shared_libs: [
+        "libSecC2ComponentStore",
+        "libavservices_minijail_vendor",
+        "libbinder",
+        "libhidlbase",
+    ],
+}

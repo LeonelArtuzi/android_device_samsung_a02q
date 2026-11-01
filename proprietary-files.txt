@@ -50,7 +50,6 @@ vendor/bin/hw/capabilityconfigstoretest
 vendor/bin/hw/macloader
 vendor/bin/hw/mfgloader
 vendor/bin/hw/rild
-vendor/bin/hw/samsung.software.media.c2@1.0-service
 vendor/bin/hw/vendor.display.color@1.0-service
 vendor/bin/hw/vendor.qti.esepowermanager@1.1-service
 vendor/bin/hw/vendor.qti.hardware.capabilityconfigstore@1.0-service
@@ -401,10 +400,8 @@ vendor/etc/cne/wqeclient/VZW/VZW_profile5.xml
 vendor/etc/cne/wqeclient/VZW/VZW_profile6.xml
 vendor/etc/data/dsi_config.xml
 vendor/etc/data/netmgr_config.xml
-vendor/etc/dax3_media_codecs_dolby_audio.xml
 vendor/etc/default-permissions/com.qualcomm.qti.cne.xml
 vendor/etc/default_volume_tables.xml
-vendor/etc/dolby/dax-default.xml
 vendor/etc/excluded-input-devices.xml
 vendor/etc/floating_feature.xml
 vendor/etc/flp.conf
@@ -513,7 +510,6 @@ vendor/etc/media_codecs_c2_sec.xml
 vendor/etc/media_codecs_c2_sec_ape.xml
 vendor/etc/media_codecs_c2_sec_qcp.xml
 vendor/etc/media_codecs_c2_sec_wmx.xml
-vendor/etc/media_codecs_dolby_audio.xml
 vendor/etc/media_codecs_google_audio.xml
 vendor/etc/media_codecs_google_c2.xml
 vendor/etc/media_codecs_google_c2_audio.xml
@@ -696,7 +692,6 @@ vendor/firmware/cpp_firmware_v1_5_1.fw
 vendor/firmware/cpp_firmware_v1_5_2.fw
 vendor/firmware/cpp_firmware_v1_6_0.fw
 vendor/firmware/cpp_firmware_v1_8_0.fw
-vendor/firmware/dax_param.bin
 vendor/firmware/fs1603s.fsm
 vendor/firmware/hx_6mask_criteria.csv
 vendor/firmware/hx_7mask_criteria.csv
@@ -823,7 +818,6 @@ vendor/lib/libOmxVpp.so
 vendor/lib/libOmxWmaDec.so
 vendor/lib/libOpenCL.so
 vendor/lib/libQSEEComAPI.so
-vendor/lib/libSecC2ComponentStore.so
 vendor/lib/libSecureUILib.so
 vendor/lib/libStDrvInt.so
 vendor/lib/libUBWC.so
@@ -1913,15 +1907,12 @@ vendor/lib/libcodec2_sec_vc1dec.so
 vendor/lib/libcodec2_sec_wmadec.so
 vendor/lib/libcodec2_sec_wmv7dec.so
 vendor/lib/libcodec2_sec_wmv8dec.so
-vendor/lib/libcodec2_soft_ac4dec.so
-vendor/lib/libcodec2_soft_eac3dec.so
 vendor/lib/libcodecsolutionhelper_vendor.so
 vendor/lib/libcomprcapture.so
 vendor/lib/libconfigdb.so
 vendor/lib/libcpion.so
 vendor/lib/libcppf.so
 vendor/lib/libdataitems.so
-vendor/lib/libdeccfg.so
 vendor/lib/libdepthmapwrapper.so
 vendor/lib/libdiag.so
 vendor/lib/libdiagjni.so
@@ -2156,7 +2147,6 @@ vendor/lib/libperfgluelayer.so
 vendor/lib/libperfioctl.so
 vendor/lib/libperipheral_client.so
 vendor/lib/libpredeflicker_native.so
-vendor/lib/libprofileparamstorage.so
 vendor/lib/libpvr.so
 vendor/lib/libqcbor.so
 vendor/lib/libqcc_file_agent.so
@@ -2296,7 +2286,6 @@ vendor/lib/soundfx/libqcomvoiceprocessing.so
 vendor/lib/soundfx/libqcreverb.so
 vendor/lib/soundfx/libqcvirt.so
 vendor/lib/soundfx/libshoebox.so
-vendor/lib/soundfx/libswdap.so
 vendor/lib/vendor.display.color@1.0.so
 vendor/lib/vendor.display.color@1.1.so
 vendor/lib/vendor.display.color@1.2.so
