@@ -20,7 +20,8 @@ LOCAL_SRC_FILES := \
     hint-data.c \
     Power.cpp \
     main.cpp \
-    power-8953.c
+    power-8953.c \
+    ../../../../device/samsung/a02q/power/power-mode.cpp
 
 LOCAL_SHARED_LIBRARIES := \
     liblog \
@@ -34,7 +35,8 @@ LOCAL_SHARED_LIBRARIES := \
 LOCAL_HEADER_LIBRARIES := libhardware_headers
 
 # Boosts go through the stock perf HAL (libqti-perfd-client, dlopen'ed).
+# MODE_EXT: power-mode.cpp (battery saver caps the CPU).
 LOCAL_CFLAGS += -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-variable \
-    -DINTERACTION_BOOST
+    -DINTERACTION_BOOST -DMODE_EXT
 
 include $(BUILD_EXECUTABLE)
