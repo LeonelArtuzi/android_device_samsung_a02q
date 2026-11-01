@@ -159,6 +159,32 @@ WIFI_DRIVER_FW_PATH_P2P := "p2p"
 # the NVM tags are sent by a02q-bt-nvm (bluetooth/).
 BOARD_HAVE_BLUETOOTH_QCOM := true
 
+# CAF HALs: registers the qcom-display/audio/media paths and the
+# hardware/qcom-caf/msm8953 namespace. Display is CAF; audio/media blobs stay
+# until switched (their CAF modules are defined but not installed).
+BOARD_USES_QCOM_HARDWARE := true
+# msm8953 with the 4.9 kernel (stock LA.UM.9.6.2): UM_4_9_LEGACY family, i.e.
+# the hardware/qcom-caf/msm8953 HALs plus the commonsys display namespaces.
+# Unset, Lineage files msm8953 under UM_3_18 and builds the msm8996 HALs.
+TARGET_ENFORCES_QSSI := true
+# Audio stays stock for now: audio.primary dlopens its plugins (a2dp offload,
+# hfp, spkr prot...) and hands them its private struct audio_device, so HAL and
+# plugins must come from the same source. qcom-audio then points at the
+# (absent) device audio/ dir and the CAF audio tree defines nothing.
+USE_DEVICE_SPECIFIC_AUDIO := true
+
+# Display (CAF msm8953). Matches the stock gralloc1 ABI, checked by RE:
+# private_handle_t is pack(4) with reserved_size at +108 (numInts 23), and
+# MetaData_t is 0x75e0 bytes with reservedSize at +0x75c8.
+TARGET_GRALLOC_HANDLE_HAS_RESERVED_SIZE := true
+TARGET_USES_GRALLOC1 := true
+TARGET_USES_HWC2 := true
+TARGET_USES_ION := true
+
+# Power HAL (vendor/qcom/opensource/power): battery saver caps the CPU.
+TARGET_POWERHAL_MODE_EXT := $(DEVICE_PATH)/power/power-mode.cpp
+TARGET_USES_INTERACTION_BOOST := true
+
 # SELinux: qcom legacy-um policy (lists msm8953). Device policy goes in sepolicy/vendor.
 include device/qcom/sepolicy-legacy-um/SEPolicy.mk
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor

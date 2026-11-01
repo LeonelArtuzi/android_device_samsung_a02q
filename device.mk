@@ -25,6 +25,38 @@ PRODUCT_PACKAGES += \
     FrameworksResA02q \
     vendor.lineage.livedisplay@2.0-service-sdm
 
+# Display: CAF SDM HWC2, gralloc1 and memtrack (hardware/qcom-caf/msm8953/display).
+PRODUCT_PACKAGES += \
+    gralloc.msm8953 \
+    hwcomposer.msm8953 \
+    libdisplayconfig.qti \
+    libqdMetaData \
+    memtrack.msm8953
+
+# CAF modules replacing stock blobs (their sources are built with
+# BOARD_USES_QCOM_HARDWARE): IPA/data, OMX media, display config AIDL, lights.
+PRODUCT_PACKAGES += \
+    IPACM_cfg.xml \
+    ipacm \
+    librmnetctl \
+    libc2dcolorconvert \
+    libOmxAacEnc \
+    libOmxAmrEnc \
+    libOmxCore \
+    libOmxEvrcEnc \
+    libOmxG711Enc \
+    libOmxQcelp13Enc \
+    libOmxVdec \
+    libOmxVenc \
+    libstagefrighthw \
+    lights.msm8953 \
+    vendor.qti.hardware.display.config-V1-ndk_platform \
+    vendor.qti.hardware.display.config-V2-ndk_platform \
+    vendor.qti.hardware.display.config-V3-ndk_platform \
+    vendor.qti.hardware.display.config-V4-ndk_platform \
+    vendor.qti.hardware.display.config-V5-ndk_platform \
+    vendor.qti.hardware.display.config-V6-ndk_platform
+
 # Camera HAL shim (see camera/camera_shim.c).
 PRODUCT_PACKAGES += \
     camera.a02q
@@ -49,7 +81,6 @@ PRODUCT_PACKAGES += \
     android.frameworks.displayservice@1.0.vendor \
     android.frameworks.sensorservice@1.0.vendor \
     android.hardware.atrace@1.0.vendor \
-    gralloc.default \
     libcld80211 \
     android.hardware.audio.common-util.vendor \
     android.hardware.audio.common@2.0-util.vendor \
@@ -196,7 +227,6 @@ PRODUCT_PACKAGES += \
     android.system.net.netd@1.1.vendor \
     android.system.wifi.keystore@1.0.vendor \
     audio.bluetooth.default \
-    audio.primary.default \
     audio.r_submix.default \
     audio.usb.default \
     camera.device@1.0-impl \
@@ -285,7 +315,6 @@ PRODUCT_PACKAGES += \
     libvpx.vendor \
     libwifi-hal \
     libz_stable.vendor \
-    local_time.default \
     vendor.display.config@1.0.vendor \
     vendor.display.config@1.1.vendor \
     vendor.display.config@1.10.vendor \
@@ -320,8 +349,7 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.perf@2.2.vendor \
     vendor.qti.hardware.servicetracker@1.0.vendor \
     vendor.qti.hardware.servicetracker@1.1.vendor \
-    vendor.qti.hardware.servicetracker@1.2.vendor \
-    vibrator.default
+    vendor.qti.hardware.servicetracker@1.2.vendor
 
 PRODUCT_USES_VENDORIMAGE := true
 
