@@ -42,6 +42,9 @@ TARGET_KERNEL_SOURCE := kernel/samsung/a02q
 TARGET_KERNEL_CONFIG := a02q_ltn_open_defconfig a02q_lineage.config
 # Stock modules' vermagic is 4.9.227-26302074; setting LOCALVERSION also stops the git "+" suffix.
 TARGET_KERNEL_ADDITIONAL_FLAGS := LOCALVERSION=-26302074
+# Defines HUAQIN_KERNEL_PROJECT_HS50 like Samsung's AndroidKernel.mk; without it the
+# s5k3l6 sjc/ofilm module check is compiled out and the wrong OTP/actuator is used.
+TARGET_KERNEL_ADDITIONAL_FLAGS += HUAQIN_PROJECT_NAME=HS50
 # Samsung's dtc 1.4.4 (same as stock) + overlay build for the hs50 .dtbo files.
 TARGET_KERNEL_ADDITIONAL_FLAGS += \
     DTC_EXT=$(abspath $(TARGET_KERNEL_SOURCE))/tools/dtc \
