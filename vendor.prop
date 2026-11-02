@@ -83,7 +83,9 @@ vendor.audio.feature.compr_cap.enable=false
 vendor.audio.feature.hifi_audio.enable=true
 vendor.audio.feature.hdmi_edid.enable=true
 vendor.audio.feature.dsm_feedback.enable=false
-vendor.audio.feature.ssrec.enable=true
+# Surround recording is off on this platform (ro.vendor.audio.sdk.ssr=false) and
+# libssrec needs a proprietary header, so the HAL does not load the plugin.
+vendor.audio.feature.ssrec.enable=false
 vendor.audio.feature.compr_voip.enable=true
 vendor.audio.feature.kpi_optimize.enable=true
 vendor.audio.feature.usb_offload.enable=false

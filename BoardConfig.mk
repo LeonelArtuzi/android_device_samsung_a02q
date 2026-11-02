@@ -177,11 +177,13 @@ DEVICE_SPECIFIC_AUDIO_PATH := $(DEVICE_PATH)/qcom/caf-msm8953/audio
 # the hardware/qcom-caf/msm8953 HALs plus the commonsys display namespaces.
 # Unset, Lineage files msm8953 under UM_3_18 and builds the msm8996 HALs.
 TARGET_ENFORCES_QSSI := true
-# Audio stays stock for now: audio.primary dlopens its plugins (a2dp offload,
-# hfp, spkr prot...) and hands them its private struct audio_device, so HAL and
-# plugins must come from the same source. qcom-audio then points at the
-# (absent) device audio/ dir and the CAF audio tree defines nothing.
-USE_DEVICE_SPECIFIC_AUDIO := true
+# Audio: CAF msm8953 HAL (msm8974 platform code, like stock). Flags chosen by
+# building it and diffing its exports against the stock HAL: what remains are
+# Huaqin paths for amplifiers this unit lacks (TI/NXP/Awinic) and its FM hook.
+# DYNAMIC_LOG and EXT_HDMI need proprietary headers (logging / HDMI only).
+BOARD_USES_ALSA_AUDIO := true
+AUDIO_FEATURE_ENABLED_DLKM := true
+AUDIO_FEATURE_ENABLED_EXTENDED_COMPRESS_FORMAT := true
 
 # Display (CAF msm8953). Matches the stock gralloc1 ABI, checked by RE:
 # private_handle_t is pack(4) with reserved_size at +108 (numInts 23), and

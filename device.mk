@@ -69,6 +69,36 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video_le.xml
 
+# Audio: CAF HAL with its plugins, effects and OMX audio encoders (they share
+# the HAL's private structures, so they come from the same source).
+PRODUCT_PACKAGES += \
+    audio.primary.msm8953 \
+    liba2dpoffload \
+    libbatterylistener \
+    libcirrusspkrprot \
+    libcomprcapture \
+    libexthwplugin \
+    libhdmiedid \
+    libhfp \
+    libsndmonitor \
+    libspkrprot \
+    libqcompostprocbundle \
+    libqcomvisualizer \
+    libqcomvoiceprocessing \
+    libOmxAacEnc \
+    libOmxAmrEnc \
+    libOmxEvrcEnc \
+    libOmxG711Enc \
+    libOmxQcelp13Enc
+
+# Audio HAL configs (stock content): the mixer paths and platform info this
+# unit's card (msm8953-snd-card-mtp, internal codec, GPIO speaker PA) uses.
+PRODUCT_COPY_FILES += \
+    device/samsung/a02q/configs/audio/mixer_paths_mtp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_mtp.xml \
+    device/samsung/a02q/configs/audio/audio_platform_info_intcodec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_intcodec.xml \
+    device/samsung/a02q/configs/audio/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
+    device/samsung/a02q/configs/audio/audio_tuning_mixer.txt:$(TARGET_COPY_OUT_VENDOR)/etc/audio_tuning_mixer.txt
+
 # Camera HAL shim (see camera/camera_shim.c).
 PRODUCT_PACKAGES += \
     camera.a02q
@@ -249,7 +279,6 @@ PRODUCT_PACKAGES += \
     camera.device@3.5-external-impl \
     camera.device@3.5-impl \
     camera.device@3.6-external-impl \
-    com.qualcomm.qti.bluetooth_audio@1.0.vendor \
     libalsautils \
     libaudiopreprocessing \
     libavservices_minijail.vendor \
@@ -340,8 +369,6 @@ PRODUCT_PACKAGES += \
     vendor.display.config@1.8.vendor \
     vendor.display.config@1.9.vendor \
     vendor.display.config@2.0.vendor \
-    vendor.qti.hardware.bluetooth_audio@2.0.vendor \
-    vendor.qti.hardware.bluetooth_audio@2.1.vendor \
     vendor.qti.hardware.btconfigstore@1.0.vendor \
     vendor.qti.hardware.btconfigstore@2.0.vendor \
     vendor.qti.hardware.camera.device@1.0.vendor \
