@@ -1,0 +1,2 @@
+# Torch intensity: set by A02qParts (system), read by the camera shim (vendor).
+system_restricted_prop(a02q_torch_prop)

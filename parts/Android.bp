@@ -1,0 +1,14 @@
+// Device settings injected into Settings (System > Flashlight): torch
+// intensity, applied by the camera shim (camera/camera_shim.c).
+android_app {
+    name: "A02qParts",
+    srcs: ["src/**/*.java"],
+    resource_dirs: ["res"],
+    certificate: "platform",
+    platform_apis: true,
+    system_ext_specific: true,
+    static_libs: [
+        "androidx.preference_preference",
+        "SettingsLibCollapsingToolbarBaseActivity",
+    ],
+}

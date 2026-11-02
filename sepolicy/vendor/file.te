@@ -1,2 +1,3 @@
 type sysfs_sec_tsp, sysfs_type, fs_type;
 type sysfs_sec_afc, sysfs_type, fs_type;
+type sysfs_camera_flash, sysfs_type, fs_type;

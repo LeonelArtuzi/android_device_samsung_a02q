@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Configurações do dispositivo</string>
+    <string name="torch_title">Lanterna</string>
+    <string name="torch_summary">Intensidade da lanterna</string>
+    <string name="torch_level_title">Intensidade</string>
+    <string name="torch_level_summary">O nível 4 é a intensidade de fábrica. Vale na próxima vez que a lanterna acender.</string>
+</resources>

@@ -12,17 +12,26 @@
  *    libmmcamera_interface reports. The AOSP framework asks for 0..N-1, so the
  *    shim exposes contiguous IDs and translates them both ways. The extra rear
  *    sensors are only probed with persist.vendor.camera.expose.aux=1.
+ *
+ * Torch intensity: the flash driver's rear_torch_flash node takes 1001-1009
+ * and writes the PMI632 torch current register in 5 steps; the stock HAL
+ * lights the torch at step 4. The level picked in Settings (A02qParts) is
+ * applied after every enable, since lighting the LED resets the register.
  */
 
 #define LOG_TAG "camera.a02q"
 
 #include <dlfcn.h>
 #include <errno.h>
+#include <fcntl.h>
 #include <pthread.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
+#include <cutils/properties.h>
 #include <hardware/camera_common.h>
 #include <log/log.h>
 
@@ -176,11 +185,28 @@ static int shim_open_legacy(const struct hw_module_t* module __unused, const cha
     return vendor->open_legacy(&vendor->common, vendor_id, halVersion, device);
 }
 
+#define TORCH_LEVEL_PROP "persist.sys.a02q.torch_level"
+#define TORCH_LEVEL_NODE "/sys/class/camera/flash/rear_torch_flash"
+
+/* Only right after the HAL lit the torch: with the register at 0 the node
+ * turns the torch on by itself. Unset level = stock current. */
+static void apply_torch_level(void) {
+    static const char* const codes[] = {"1001", "1002", "1003", "1005", "1007"};
+    int level = property_get_int32(TORCH_LEVEL_PROP, 0);
+    if (level < 1 || level > 5) return;
+    int fd = open(TORCH_LEVEL_NODE, O_WRONLY | O_CLOEXEC);
+    if (fd < 0 || write(fd, codes[level - 1], strlen(codes[level - 1])) < 0)
+        ALOGE("torch level %d: %s: %s", level, TORCH_LEVEL_NODE, strerror(errno));
+    if (fd >= 0) close(fd);
+}
+
 static int shim_set_torch_mode(const char* camera_id, bool enabled) {
     char buf[16];
     const char* vendor_id = to_vendor_id_str(camera_id, buf, sizeof(buf));
     if (!vendor_id) return -EINVAL;
-    return vendor->set_torch_mode(vendor_id, enabled);
+    int ret = vendor->set_torch_mode(vendor_id, enabled);
+    if (ret == 0 && enabled && strcmp(vendor_id, "0") == 0) apply_torch_level();
+    return ret;
 }
 
 static int shim_init(void) {

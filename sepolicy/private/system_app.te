@@ -1,0 +1,2 @@
+# A02qParts (android.uid.system): torch intensity.
+set_prop(system_app, a02q_torch_prop)

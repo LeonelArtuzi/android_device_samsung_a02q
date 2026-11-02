@@ -1,0 +1,4 @@
+# camera.a02q shim: torch intensity level, written to the flash driver node.
+get_prop(hal_camera_default, a02q_torch_prop)
+allow hal_camera_default sysfs_camera_flash:dir search;
+allow hal_camera_default sysfs_camera_flash:file w_file_perms;

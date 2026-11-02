@@ -5,6 +5,7 @@ cc_library_shared {
     srcs: ["camera_shim.c"],
     shared_libs: [
         "libcamera_metadata",
+        "libcutils",
         "libdl",
         "liblog",
     ],

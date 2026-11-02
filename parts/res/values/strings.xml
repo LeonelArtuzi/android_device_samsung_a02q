@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Device settings</string>
+    <string name="torch_title">Flashlight</string>
+    <string name="torch_summary">Flashlight brightness</string>
+    <string name="torch_level_title">Brightness</string>
+    <string name="torch_level_summary">Level 4 is the factory brightness. Applies the next time the flashlight turns on.</string>
+</resources>

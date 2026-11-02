@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SeekBarPreference
+        android:key="torch_level"
+        android:title="@string/torch_level_title"
+        android:summary="@string/torch_level_summary"
+        android:persistent="false"
+        android:max="5"
+        app:min="1"
+        app:showSeekBarValue="true"
+        app:updatesContinuously="false" />
+</PreferenceScreen>

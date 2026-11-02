@@ -106,8 +106,10 @@ PRODUCT_COPY_FILES += \
     device/samsung/a02q/configs/audio/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
     device/samsung/a02q/configs/audio/audio_tuning_mixer.txt:$(TARGET_COPY_OUT_VENDOR)/etc/audio_tuning_mixer.txt
 
-# Camera HAL shim (see camera/camera_shim.c).
+# Camera HAL shim (see camera/camera_shim.c) and the Settings page for the
+# torch intensity it applies (parts/).
 PRODUCT_PACKAGES += \
+    A02qParts \
     camera.a02q
 
 # Samsung software Codec2: open-source store and service (codec2/) serving the
