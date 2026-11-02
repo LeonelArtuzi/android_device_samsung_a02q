@@ -1,0 +1,7 @@
+on early-boot
+    chown system system /sys/class/leds/vibrator/vmax_mv
+
+service vendor.vibrator.a02q /vendor/bin/hw/android.hardware.vibrator-service.a02q
+    class hal
+    user system
+    group system input

@@ -10,7 +10,7 @@ PRODUCT_PACKAGES += \
     android.hardware.cas@1.2-service \
     android.hardware.drm@1.4-service.clearkey \
     android.hardware.wifi@1.0-service \
-    vendor.qti.hardware.vibrator.service
+    android.hardware.vibrator-service.a02q
 
 # Bluetooth: AOSP HIDL service + CAF libbt-vendor (SMD) + NVM tag loader (bluetooth/).
 PRODUCT_PACKAGES += \
@@ -245,10 +245,6 @@ PRODUCT_PACKAGES += \
     android.hardware.usb@1.2.vendor \
     android.hardware.usb@1.3.vendor \
     android.hardware.vibrator-V1-ndk_platform.vendor \
-    android.hardware.vibrator@1.0.vendor \
-    android.hardware.vibrator@1.1.vendor \
-    android.hardware.vibrator@1.2.vendor \
-    android.hardware.vibrator@1.3.vendor \
     android.hardware.wifi.hostapd@1.0.vendor \
     android.hardware.wifi.hostapd@1.1.vendor \
     android.hardware.wifi.hostapd@1.2.vendor \
@@ -317,7 +313,6 @@ PRODUCT_PACKAGES += \
     libprotobuf-cpp-full.vendor \
     libprotobuf-cpp-lite.vendor \
     libqti_vndfwk_detect.vendor \
-    libqtivibratoreffect \
     libreverbwrapper \
     librilutils \
     libsfplugin_ccodec_utils.vendor \
@@ -349,7 +344,6 @@ PRODUCT_PACKAGES += \
     libstagefright_softomx.vendor \
     libstagefright_softomx_plugin.vendor \
     libtinycompress \
-    libvibrator.vendor \
     libvisualizer \
     libvndfwk_detect_jni.qti.vendor \
     libvorbisidec.vendor \

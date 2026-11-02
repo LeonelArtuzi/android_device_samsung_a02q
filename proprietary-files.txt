@@ -62,7 +62,6 @@ vendor/bin/hw/vendor.samsung.hardware.light-service
 vendor/bin/hw/vendor.samsung.hardware.media.converter@1.0-service
 vendor/bin/hw/vendor.samsung.hardware.miscpower@2.0-service
 vendor/bin/hw/vendor.samsung.hardware.sysinput@1.2-service
-vendor/bin/hw/vendor.samsung.hardware.vibrator@2.2-service
 vendor/bin/init.class_main.sh
 vendor/bin/init.crda.sh
 vendor/bin/init.mdm.sh
@@ -463,7 +462,6 @@ vendor/etc/init/vendor.samsung.hardware.media.converter@1.0-service.rc
 vendor/etc/init/vendor.samsung.hardware.miscpower@2.0-service.rc
 vendor/etc/init/vendor.samsung.hardware.security.engmode@1.0-service.rc
 vendor/etc/init/vendor.samsung.hardware.sysinput@1.2-service.rc
-vendor/etc/init/vendor.samsung.hardware.vibrator@2.2-service.rc
 vendor/etc/init/wifi.rc
 vendor/etc/init/wifi_qcom.rc
 vendor/etc/izat.conf
@@ -2275,9 +2273,6 @@ vendor/lib/vendor.samsung.hardware.sysinput@1.0.so
 vendor/lib/vendor.samsung.hardware.sysinput@1.1.so
 vendor/lib/vendor.samsung.hardware.sysinput@1.2.so
 vendor/lib/vendor.samsung.hardware.thermal@1.0.so
-vendor/lib/vendor.samsung.hardware.vibrator@2.0.so
-vendor/lib/vendor.samsung.hardware.vibrator@2.1.so
-vendor/lib/vendor.samsung.hardware.vibrator@2.2.so
 vendor/lib/vintf-codecsolution-V2-ndk_platform.so
 vendor/lib/vndk/libstagefright_omx_utils.so
 vendor/lib/vndk/libstagefright_xmlparser.so
