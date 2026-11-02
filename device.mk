@@ -464,6 +464,11 @@ PRODUCT_COPY_FILES += \
     device/samsung/a02q/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_audio_policy_configuration.xml
 
+# Perf HAL boosts: stock config + GPU floor during touch/launch/animation
+# (see configs/perf/perfboostsconfig.xml).
+PRODUCT_COPY_FILES += \
+    device/samsung/a02q/configs/perf/perfboostsconfig.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perfboostsconfig.xml
+
 # Wi-Fi (configs in vendor/etc/wifi stay stock; services in stock init.qcom.rc).
 PRODUCT_PACKAGES += \
     hostapd \

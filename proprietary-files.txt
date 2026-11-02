@@ -496,7 +496,6 @@ vendor/etc/nfc/sec_s3nrn74_swreg.bin
 vendor/etc/pdpcnt-conf.xml
 vendor/etc/perf/commonresourceconfigs.xml
 vendor/etc/perf/commonsysnodesconfigs.xml
-vendor/etc/perf/perfboostsconfig.xml
 vendor/etc/perf/perfconfigstore.xml
 vendor/etc/perf/targetconfig.xml
 vendor/etc/perf/targetresourceconfigs.xml
