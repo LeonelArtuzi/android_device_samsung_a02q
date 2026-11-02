@@ -413,6 +413,11 @@ PRODUCT_PACKAGES += \
     vendor.lineage.fastcharge@1.0-service.samsung \
     vendor.lineage.touch@1.0-service.samsung
 
+# Thermal: CAF HAL with an SDM450 table (thermal/); the stock thermal-engine
+# keeps doing the throttling.
+PRODUCT_PACKAGES += \
+    android.hardware.thermal@2.0-service.a02q
+
 # Hardware features (AOSP frameworks/native copies of the stock list; no IMS).
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \

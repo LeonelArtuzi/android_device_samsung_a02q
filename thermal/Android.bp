@@ -1,0 +1,38 @@
+// hardware/qcom-caf/thermal (lineage-19.1 e15dcbe) with an SDM450 (soc_id 338)
+// table; a02q changes are marked "a02q:" in the sources.
+cc_binary {
+	name: "android.hardware.thermal@2.0-service.a02q",
+	defaults: [
+		"hidl_defaults",
+	],
+	vendor: true,
+	relative_install_path: "hw",
+	init_rc: ["android.hardware.thermal@2.0-service.a02q.rc"],
+	vintf_fragments: ["android.hardware.thermal@2.0-service.a02q.xml"],
+	srcs: [
+		"service.cpp",
+		"thermal.cpp",
+		"thermalConfig.cpp",
+		"thermalCommon.cpp",
+		"thermalUtils.cpp",
+		"thermalMonitor.cpp",
+	],
+	shared_libs: [
+		"libbase",
+		"libcutils",
+		"libhidlbase",
+		"libutils",
+		"liblog",
+		"android.hardware.thermal@1.0",
+		"android.hardware.thermal@2.0",
+	],
+	header_libs: [
+		"liblog_headers",
+		"libcutils_headers"
+	],
+	cflags: [
+		"-Wno-unused-parameter",
+		"-Wno-unused-variable",
+		"-fexceptions",
+	],
+}
