@@ -418,6 +418,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.thermal@2.0-service.a02q
 
+# Face unlock: the stock Huaqin/ArcSoft HAL (vendor.samsung...face@2.0-service)
+# already serves android.hardware.biometrics.face@1.0.
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.biometrics.face.xml
+
 # Hardware features (AOSP frameworks/native copies of the stock list; no IMS).
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \

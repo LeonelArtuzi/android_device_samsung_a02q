@@ -4708,8 +4708,9 @@
          when registering authenticators with BiometricService. Format must be ID:Modality:Strength,
          where: IDs are unique per device, Modality as defined in BiometricAuthenticator.java,
          and Strength as defined in Authenticators.java -->
+    <!-- a02q: 2D camera face (stock HAL), Weak (Class 2). -->
     <string-array name="config_biometric_sensors" translatable="false" >
-        <!-- <item>0:2:15</item>  ID0:Fingerprint:Strong -->
+        <item>0:8:255</item>
     </string-array>
     <!--If true, allows the device to load udfps components on older HIDL implementations -->
     <bool name="allow_test_udfps" translatable="false" >false</bool>

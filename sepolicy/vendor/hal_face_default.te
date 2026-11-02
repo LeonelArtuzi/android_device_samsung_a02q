@@ -1,0 +1,3 @@
+# Stock Huaqin/ArcSoft face HAL: QSEE TA through /dev/qseecom, ashmem buffers.
+allow hal_face_default tee_device:chr_file rw_file_perms;
+hal_client_domain(hal_face_default, hal_allocator)
