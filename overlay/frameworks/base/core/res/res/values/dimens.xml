@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Stock product RRO: tall enough for the 45 px waterdrop cutout. -->
+    <dimen name="status_bar_height_portrait">45px</dimen>
+</resources>

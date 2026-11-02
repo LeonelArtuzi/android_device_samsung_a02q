@@ -2276,12 +2276,6 @@ vendor/lib/vendor.samsung.hardware.thermal@1.0.so
 vendor/lib/vintf-codecsolution-V2-ndk_platform.so
 vendor/lib/vndk/libstagefright_omx_utils.so
 vendor/lib/vndk/libstagefright_xmlparser.so
-vendor/overlay/ConnectivityOverlay/ConnectivityOverlay.apk
-vendor/overlay/SoftapOverlay/SoftapOverlay.apk
-vendor/overlay/SoftapOverlayWpa3/SoftapOverlayWpa3.apk
-vendor/overlay/TetheringOverlay/TetheringOverlay.apk
-vendor/overlay/TetheringOverlay_Gsi/TetheringOverlay_Gsi.apk
-vendor/overlay/framework-res__auto_generated_rro_vendor.apk
 vendor/recovery-from-boot.p
 vendor/rfs/rfs_symlinks
 vendor/ueventd.rc

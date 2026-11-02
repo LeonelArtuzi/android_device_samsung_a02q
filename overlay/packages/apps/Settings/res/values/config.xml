@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The vibrator HAL controls amplitude through the LDO voltage (vmax_mv). -->
+    <bool name="config_vibration_supports_multiple_intensities">true</bool>
+</resources>

@@ -19,10 +19,17 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-service \
     libbt-vendor
 
-# Display: LiveDisplay SDM backend (picture adjustment through the stock
-# libsdm-disp-vndapis) + framework overlay enabling Night Light.
+# Overlays (frameworks/base from the stock RROs, Settings, lineage-sdk).
+DEVICE_PACKAGE_OVERLAYS += device/samsung/a02q/overlay
+
+# RROs for APEX modules, which static overlays cannot reach.
 PRODUCT_PACKAGES += \
-    FrameworksResA02q \
+    TetheringResA02q \
+    WifiResA02q
+
+# Display: LiveDisplay SDM backend (picture adjustment through the stock
+# libsdm-disp-vndapis).
+PRODUCT_PACKAGES += \
     vendor.lineage.livedisplay@2.0-service-sdm
 
 # Display: CAF SDM HWC2, gralloc1 and memtrack (hardware/qcom-caf/msm8953/display).
@@ -412,5 +419,4 @@ PRODUCT_PACKAGES += \
 
 # TODO bring-up (still stock blobs/rc today):
 #  - device sepolicy (sepolicy/vendor) once permissive boot logs show denials
-#  - overlays (framework/resources)
 #  - trim proprietary-files.txt toward open-source HALs (power, health, lights, usb)

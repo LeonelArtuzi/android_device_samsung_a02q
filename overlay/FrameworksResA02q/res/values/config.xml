@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- The SDM HWC applies color matrices in the MDP (PCC): layers stay in
-         DEVICE composition with a matrix set. Enables Night Light and
-         Extra dim, which LiveDisplay defers to for color temperature. -->
-    <bool name="config_setColorTransformAccelerated">true</bool>
-</resources>

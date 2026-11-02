@@ -1,0 +1,6 @@
+// Wi-Fi module resources live in an APEX, so only an RRO can reach them.
+// Values from the stock SoftapOverlay + SoftapOverlayWpa3 (A025MUBS9CXI1).
+runtime_resource_overlay {
+    name: "WifiResA02q",
+    vendor: true,
+}

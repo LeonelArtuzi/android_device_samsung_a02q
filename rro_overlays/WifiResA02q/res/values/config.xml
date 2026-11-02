@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Hotspot (stock SoftapOverlay / SoftapOverlayWpa3). -->
+    <bool name="config_wifi_softap_acs_supported">true</bool>
+    <bool name="config_wifi_softap_sae_supported">true</bool>
+    <integer name="config_wifiHardwareSoftapMaxClientCount">10</integer>
+    <string name="config_wifiSoftap2gChannelList" translatable="false">1-11</string>
+    <string name="config_wifiSoftap5gChannelList" translatable="false">149</string>
+    <bool name="config_wifiSoftApDynamicCountryCodeUpdateSupported">true</bool>
+    <bool name="config_wifiSoftapPassphraseAsciiEncodableCheck">false</bool>
+    <bool name="config_wifiSofapClientForceDisconnectSupported">false</bool>
+</resources>
