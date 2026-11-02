@@ -1,0 +1,20 @@
+cc_library_shared {
+    name: "libqservice",
+    vendor: true,
+    defaults: ["display_defaults"],
+    shared_libs: ["libbinder"],
+    cflags: [
+        "-DLOG_TAG=\"qdqservice\"",
+        "-Wno-sign-conversion",
+        // a02q: soong exempts only vendor/ and hardware/ from the manual binder
+        // interface check (cc/compiler.go allowedManualInterfacePaths); this
+        // copy lives under device/, so set what the original path gets.
+        "-DDO_NOT_CHECK_MANUAL_BINDER_INTERFACES",
+    ],
+    srcs: [
+        "QService.cpp",
+        "IQService.cpp",
+        "IQClient.cpp",
+        "IQHDMIClient.cpp",
+    ],
+}

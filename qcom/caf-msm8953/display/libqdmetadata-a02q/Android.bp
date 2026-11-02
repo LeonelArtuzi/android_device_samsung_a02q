@@ -1,0 +1,28 @@
+// a02q: vendor/qcom/opensource/display/libqdmetadata (sources copied unchanged)
+// built with reserved_size in private_handle_t, matching the stock gralloc ABI
+// (validate() checks numInts == 23). Lineage exports its own libqdMetaData to
+// /vendor/lib and a second module there would clash, so this one goes to ODM:
+// /odm/lib comes before /vendor/lib in the vendor and sphal linker namespaces,
+// the Treble way for the device to replace a vendor library.
+cc_library_shared {
+    name: "libqdMetaData_a02q",
+    stem: "libqdMetaData",
+    device_specific: true,
+    cflags: [
+        "-Wno-sign-conversion",
+        "-DLOG_TAG=\"qdmetadata\"",
+        "-D__QTI_DISPLAY_GRALLOC__",
+        "-DGRALLOC_HANDLE_HAS_RESERVED_SIZE",
+    ],
+    shared_libs: [
+        "liblog",
+        "libcutils",
+        "libutils",
+        "libhidlbase",
+        "libgralloc.qti",
+        "libgralloctypes",
+    ],
+    header_libs: ["libhardware_headers", "display_intf_headers"],
+    srcs: ["qdMetaData.cpp", "qd_utils.cpp"],
+    export_header_lib_headers: ["display_intf_headers"],
+}

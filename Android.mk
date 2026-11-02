@@ -99,4 +99,9 @@ $(foreach l,$(A02Q_VENDOR_SYMLINKS),\
 
 ALL_DEFAULT_INSTALLED_MODULES += $(A02Q_VENDOR_DIR_TARGETS)
 
+# CAF display/media/audio (device copy, qcom/README.md). Its Android.mk only
+# defines modules when its path is in PRODUCT_SOONG_NAMESPACES. Kept last: it
+# resets LOCAL_PATH.
+include $(LOCAL_PATH)/qcom/caf-msm8953/Android.mk
+
 endif

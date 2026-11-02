@@ -163,6 +163,16 @@ BOARD_HAVE_BLUETOOTH_QCOM := true
 # hardware/qcom-caf/msm8953 namespace. Display is CAF; audio/media blobs stay
 # until switched (their CAF modules are defined but not installed).
 BOARD_USES_QCOM_HARDWARE := true
+# CAF sources are device copies (qcom/, see qcom/README.md): Lineage's repos stay
+# untouched. The CAF namespace and the qcom-display/media/audio paths point at
+# qcom/caf-msm8953.
+QCOM_SOONG_NAMESPACE := $(DEVICE_PATH)/qcom/caf-msm8953
+USE_DEVICE_SPECIFIC_DISPLAY := true
+DEVICE_SPECIFIC_DISPLAY_PATH := $(DEVICE_PATH)/qcom/caf-msm8953/display
+USE_DEVICE_SPECIFIC_MEDIA := true
+DEVICE_SPECIFIC_MEDIA_PATH := $(DEVICE_PATH)/qcom/caf-msm8953/media
+USE_DEVICE_SPECIFIC_AUDIO := true
+DEVICE_SPECIFIC_AUDIO_PATH := $(DEVICE_PATH)/qcom/caf-msm8953/audio
 # msm8953 with the 4.9 kernel (stock LA.UM.9.6.2): UM_4_9_LEGACY family, i.e.
 # the hardware/qcom-caf/msm8953 HALs plus the commonsys display namespaces.
 # Unset, Lineage files msm8953 under UM_3_18 and builds the msm8996 HALs.
@@ -175,8 +185,8 @@ USE_DEVICE_SPECIFIC_AUDIO := true
 
 # Display (CAF msm8953). Matches the stock gralloc1 ABI, checked by RE:
 # private_handle_t is pack(4) with reserved_size at +108 (numInts 23), and
-# MetaData_t is 0x75e0 bytes with reservedSize at +0x75c8.
-TARGET_GRALLOC_HANDLE_HAS_RESERVED_SIZE := true
+# MetaData_t is 0x75e0 bytes with reservedSize at +0x75c8. reserved_size is set by
+# qcom/caf-msm8953/display (display_headers, libqdMetaData_a02q).
 TARGET_USES_GRALLOC1 := true
 TARGET_USES_HWC2 := true
 TARGET_USES_ION := true

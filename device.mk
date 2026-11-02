@@ -30,7 +30,7 @@ PRODUCT_PACKAGES += \
     gralloc.msm8953 \
     hwcomposer.msm8953 \
     libdisplayconfig.qti \
-    libqdMetaData \
+    libqdMetaData_a02q \
     memtrack.msm8953
 
 # CAF modules replacing stock blobs (their sources are built with
