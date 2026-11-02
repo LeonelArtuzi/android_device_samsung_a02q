@@ -407,6 +407,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     vendor.lineage.health-service.default
 
+# Lineage HALs from hardware/samsung (copies in fastcharge/ and touch/):
+# AFC fast charge toggle and glove mode (high touch sensitivity).
+PRODUCT_PACKAGES += \
+    vendor.lineage.fastcharge@1.0-service.samsung \
+    vendor.lineage.touch@1.0-service.samsung
+
 # Hardware features (AOSP frameworks/native copies of the stock list; no IMS).
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \

@@ -1,0 +1,22 @@
+// LineageOS hardware/samsung hidl/fastcharge (lineage-19.1 340c2b5), Android.mk
+// as soong; a02q changes are marked in the sources.
+cc_binary {
+    name: "vendor.lineage.fastcharge@1.0-service.samsung",
+    vendor: true,
+    relative_install_path: "hw",
+    init_rc: ["vendor.lineage.fastcharge@1.0-service.samsung.rc"],
+    vintf_fragments: ["vendor.lineage.fastcharge@1.0-service.samsung.xml"],
+    local_include_dirs: ["include"],
+    srcs: [
+        "FastCharge.cpp",
+        "service.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "libbinder",
+        "libcutils",
+        "libhidlbase",
+        "libutils",
+        "vendor.lineage.fastcharge@1.0",
+    ],
+}

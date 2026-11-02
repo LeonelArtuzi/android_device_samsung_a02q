@@ -1,0 +1,4 @@
+# Fast charge toggle: gpio_afc afc_disable node + persisted state.
+allow hal_lineage_fastcharge_default sysfs_sec_afc:dir search;
+allow hal_lineage_fastcharge_default sysfs_sec_afc:file rw_file_perms;
+set_prop(hal_lineage_fastcharge_default, vendor_fastcharge_prop)

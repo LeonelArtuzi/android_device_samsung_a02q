@@ -3,3 +3,6 @@
 # which vendor domains may not set.
 vendor.bluetooth.hciattach    u:object_r:vendor_bluetooth_prop:s0
 vendor.bluetooth.status       u:object_r:vendor_bluetooth_prop:s0
+
+# Fast charge toggle state, restored by the fastcharge HAL at boot.
+persist.vendor.sec.fastchg_enabled    u:object_r:vendor_fastcharge_prop:s0 exact bool

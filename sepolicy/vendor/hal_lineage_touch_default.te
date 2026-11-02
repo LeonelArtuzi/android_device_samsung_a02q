@@ -1,0 +1,3 @@
+# Glove mode: "glove_mode,N" to the ILITEK sec_cmd node, result read back.
+allow hal_lineage_touch_default sysfs_sec_tsp:dir search;
+allow hal_lineage_touch_default sysfs_sec_tsp:file rw_file_perms;

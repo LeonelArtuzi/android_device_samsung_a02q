@@ -1,1 +1,2 @@
 genfscon sysfs /devices/virtual/sec/tsp u:object_r:sysfs_sec_tsp:s0
+genfscon sysfs /devices/virtual/sec/afc u:object_r:sysfs_sec_afc:s0
