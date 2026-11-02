@@ -1,0 +1,3 @@
+# Double tap to wake: "aot_enable,N" to the touch driver's sec_cmd node.
+allow hal_power_default sysfs_sec_tsp:dir search;
+allow hal_power_default sysfs_sec_tsp:file w_file_perms;

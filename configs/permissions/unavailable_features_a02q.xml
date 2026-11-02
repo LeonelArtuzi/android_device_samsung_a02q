@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- AOSP handheld_core_hardware.xml (full_base_telephony) declares a compass;
+     the a02q has no magnetometer (stock Huaqin file comments it out too). -->
+<permissions>
+    <unavailable-feature name="android.hardware.sensor.compass" />
+</permissions>

@@ -4,6 +4,10 @@
  * Battery saver (Mode::LOW_POWER) is a no-op upstream. Here it caps the CPU
  * through the stock perf HAL, the same arbiter the launch/interaction boosts
  * use, so boosts and the cap never fight over scaling_max_freq directly.
+ *
+ * Double tap to wake (Mode::DOUBLE_TAP_TO_WAKE) goes through the Samsung
+ * sec_cmd interface of the ILITEK touch driver: "aot_enable,1" keeps the panel
+ * in gesture mode while suspended and a double tap reports KEY_WAKEUP.
  */
 
 #define LOG_TAG "a02q-power"
@@ -12,6 +16,7 @@
 #include <mutex>
 
 #include <aidl/android/hardware/power/BnPower.h>
+#include <android-base/file.h>
 #include <log/log.h>
 
 extern "C" {
@@ -23,6 +28,8 @@ extern "C" {
 using ::aidl::android::hardware::power::Mode;
 
 namespace {
+
+constexpr char kTspCmd[] = "/sys/class/sec/tsp/cmd";
 
 constexpr int kLowPowerHintId = 0x1100;  // after VR_MODE_SUSTAINED_PERF_HINT_ID
 
@@ -62,15 +69,25 @@ namespace power {
 namespace impl {
 
 bool isDeviceSpecificModeSupported(Mode type, bool* _aidl_return) {
-    if (type != Mode::LOW_POWER) return false;
+    if (type != Mode::LOW_POWER && type != Mode::DOUBLE_TAP_TO_WAKE) return false;
     *_aidl_return = true;
     return true;
 }
 
 bool setDeviceSpecificMode(Mode type, bool enabled) {
-    if (type != Mode::LOW_POWER) return false;
-    setLowPower(enabled);
-    return true;
+    switch (type) {
+        case Mode::LOW_POWER:
+            setLowPower(enabled);
+            return true;
+        case Mode::DOUBLE_TAP_TO_WAKE:
+            if (!::android::base::WriteStringToFile(enabled ? "aot_enable,1" : "aot_enable,0",
+                                                     kTspCmd)) {
+                ALOGE("double tap to wake: failed to write %s", kTspCmd);
+            }
+            return true;
+        default:
+            return false;
+    }
 }
 
 }  // namespace impl

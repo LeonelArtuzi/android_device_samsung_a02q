@@ -1,0 +1,3 @@
+on boot
+    # Charging control (vendor.lineage.health-service.default runs as system).
+    chown system system /sys/class/power_supply/battery/battery_charging_enabled

@@ -195,6 +195,10 @@ TARGET_USES_ION := true
 
 # Power HAL (vendor/qcom/opensource/power): battery saver caps the CPU.
 TARGET_POWERHAL_MODE_EXT := $(DEVICE_PATH)/power/power-mode.cpp
+
+# Charging control (vendor.lineage.health-service.default): the smb5 charger
+# keeps powering the phone from the input with battery charging off (bypass).
+TARGET_HEALTH_CHARGING_CONTROL_CHARGING_PATH := /sys/class/power_supply/battery/battery_charging_enabled
 TARGET_USES_INTERACTION_BOOST := true
 
 # SELinux: qcom legacy-um policy (lists msm8953). Device policy goes in sepolicy/vendor.
