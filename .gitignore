@@ -1,3 +1,0 @@
-# Dolby-specific files stay out of version control (local only).
-proprietary-files-dolby.txt
-codec2/dolby_codecs.h

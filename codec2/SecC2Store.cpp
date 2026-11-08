@@ -491,7 +491,7 @@ SecC2ComponentStore::SecC2ComponentStore()
     emplace("libcodec2_sec_wmv8dec.so");
     emplace("libcodec2_sec_mp43dec.so");
 #if __has_include("dolby_codecs.h")
-    // Dolby codec list, kept out of version control (see .gitignore).
+    // Dolby codec list.
 #include "dolby_codecs.h"
 #endif
     emplace("libcodec2_sec_vc1dec.so");
